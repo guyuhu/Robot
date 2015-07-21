@@ -1,4 +1,4 @@
-#include "mainwindow.h"
+﻿#include "mainwindow.h"
 #include <QApplication>
 #include <QPixmap>
 #include <QSplashScreen>
@@ -15,14 +15,14 @@ int main(int argc, char *argv[])
   //  QPixmap pixmap("Welcome.png");
    // QSplashScreen splash(pixmap);
     QSplashScreen *splash=new QSplashScreen;
-    splash->setPixmap(QPixmap(":resource/picture/Welcome.png"));
+    splash->setPixmap(QPixmap(":image/Welcome.png"));
     splash->show();
 
-    QTest::qSleep(3000);
-    splash->showMessage("程序启动中，可能会花费几秒钟，请耐心等待！",Qt::AlignCenter,Qt::green);
+    QTest::qSleep(2000);
+    splash->showMessage("启动中",Qt::AlignHCenter,Qt::red);
     a.processEvents();
 
-    QTest::qSleep(3000);
+    QTest::qSleep(2000);
 
     /*
 #if 0
