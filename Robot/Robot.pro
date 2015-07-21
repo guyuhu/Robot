@@ -5,6 +5,7 @@
 #-------------------------------------------------
 
 QT       += core gui
+QT +=testlib
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
@@ -18,8 +19,13 @@ SOURCES += main.cpp \
 HEADERS  += \
     mainwindow.h
 
-DISTFILES += \
-    Welcome.png
+DISTFILES +=
 
 FORMS += \
     mainwindow.ui
+
+#CONFIG +=qtestlib
+
+RESOURCES += \
+    resource.qrc
+

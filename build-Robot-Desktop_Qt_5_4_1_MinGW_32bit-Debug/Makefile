@@ -172,18 +172,18 @@ Makefile: ../Robot/Robot.pro ../../../workPath/5.4/mingw491_32/mkspecs/win32-g++
 		../../../workPath/5.4/mingw491_32/mkspecs/features/qt.prf \
 		../../../workPath/5.4/mingw491_32/mkspecs/features/resources.prf \
 		../../../workPath/5.4/mingw491_32/mkspecs/features/moc.prf \
+		../../../workPath/5.4/mingw491_32/mkspecs/features/testlib_defines.prf \
+		../../../workPath/5.4/mingw491_32/mkspecs/features/win32/console.prf \
 		../../../workPath/5.4/mingw491_32/mkspecs/features/win32/opengl.prf \
 		../../../workPath/5.4/mingw491_32/mkspecs/features/uic.prf \
-		../../../workPath/5.4/mingw491_32/mkspecs/features/win32/windows.prf \
 		../../../workPath/5.4/mingw491_32/mkspecs/features/testcase_targets.prf \
 		../../../workPath/5.4/mingw491_32/mkspecs/features/exceptions.prf \
 		../../../workPath/5.4/mingw491_32/mkspecs/features/yacc.prf \
 		../../../workPath/5.4/mingw491_32/mkspecs/features/lex.prf \
 		../Robot/Robot.pro \
-		D:/Qt5-Android/workPath/5.4/mingw491_32/lib/qtmaind.prl \
-		D:/Qt5-Android/workPath/5.4/mingw491_32/lib/Qt5Cored.prl \
 		D:/Qt5-Android/workPath/5.4/mingw491_32/lib/Qt5Widgets.prl \
 		D:/Qt5-Android/workPath/5.4/mingw491_32/lib/Qt5Gui.prl \
+		D:/Qt5-Android/workPath/5.4/mingw491_32/lib/Qt5Test.prl \
 		D:/Qt5-Android/workPath/5.4/mingw491_32/lib/Qt5Core.prl
 	$(QMAKE) -spec win32-g++ CONFIG+=debug -o Makefile ..\Robot\Robot.pro
 ..\..\..\workPath\5.4\mingw491_32\mkspecs\features\spec_pre.prf:
@@ -299,18 +299,18 @@ Makefile: ../Robot/Robot.pro ../../../workPath/5.4/mingw491_32/mkspecs/win32-g++
 ..\..\..\workPath\5.4\mingw491_32\mkspecs\features\qt.prf:
 ..\..\..\workPath\5.4\mingw491_32\mkspecs\features\resources.prf:
 ..\..\..\workPath\5.4\mingw491_32\mkspecs\features\moc.prf:
+..\..\..\workPath\5.4\mingw491_32\mkspecs\features\testlib_defines.prf:
+..\..\..\workPath\5.4\mingw491_32\mkspecs\features\win32\console.prf:
 ..\..\..\workPath\5.4\mingw491_32\mkspecs\features\win32\opengl.prf:
 ..\..\..\workPath\5.4\mingw491_32\mkspecs\features\uic.prf:
-..\..\..\workPath\5.4\mingw491_32\mkspecs\features\win32\windows.prf:
 ..\..\..\workPath\5.4\mingw491_32\mkspecs\features\testcase_targets.prf:
 ..\..\..\workPath\5.4\mingw491_32\mkspecs\features\exceptions.prf:
 ..\..\..\workPath\5.4\mingw491_32\mkspecs\features\yacc.prf:
 ..\..\..\workPath\5.4\mingw491_32\mkspecs\features\lex.prf:
 ..\Robot\Robot.pro:
-D:/Qt5-Android/workPath/5.4/mingw491_32/lib/qtmaind.prl:
-D:/Qt5-Android/workPath/5.4/mingw491_32/lib/Qt5Cored.prl:
 D:/Qt5-Android/workPath/5.4/mingw491_32/lib/Qt5Widgets.prl:
 D:/Qt5-Android/workPath/5.4/mingw491_32/lib/Qt5Gui.prl:
+D:/Qt5-Android/workPath/5.4/mingw491_32/lib/Qt5Test.prl:
 D:/Qt5-Android/workPath/5.4/mingw491_32/lib/Qt5Core.prl:
 qmake: FORCE
 	@$(QMAKE) -spec win32-g++ CONFIG+=debug -o Makefile ..\Robot\Robot.pro

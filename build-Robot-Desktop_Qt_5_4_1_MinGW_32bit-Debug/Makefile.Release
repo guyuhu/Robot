@@ -11,13 +11,13 @@ MAKEFILE      = Makefile.Release
 
 CC            = gcc
 CXX           = g++
-DEFINES       = -DUNICODE -DQT_NO_DEBUG -DQT_WIDGETS_LIB -DQT_GUI_LIB -DQT_CORE_LIB -DQT_NEEDS_QMAIN
+DEFINES       = -DUNICODE -DQT_NO_DEBUG -DQT_WIDGETS_LIB -DQT_GUI_LIB -DQT_TESTLIB_LIB -DQT_CORE_LIB -DQT_TESTCASE_BUILDDIR=\"D:/Qt5-Android/workSpace/Robot/build-Robot-Desktop_Qt_5_4_1_MinGW_32bit-Debug\"
 CFLAGS        = -pipe -fno-keep-inline-dllexport -O2 -Wall -Wextra $(DEFINES)
 CXXFLAGS      = -pipe -fno-keep-inline-dllexport -O2 -frtti -Wall -Wextra -fexceptions -mthreads $(DEFINES)
-INCPATH       = -I"..\Robot" -I"." -I"..\..\..\workPath\5.4\mingw491_32\include" -I"..\..\..\workPath\5.4\mingw491_32\include\QtWidgets" -I"..\..\..\workPath\5.4\mingw491_32\include\QtGui" -I"..\..\..\workPath\5.4\mingw491_32\include\QtCore" -I"release" -I"." -I"..\..\..\workPath\5.4\mingw491_32\mkspecs\win32-g++" 
+INCPATH       = -I"..\Robot" -I"." -I"..\..\..\workPath\5.4\mingw491_32\include" -I"..\..\..\workPath\5.4\mingw491_32\include\QtWidgets" -I"..\..\..\workPath\5.4\mingw491_32\include\QtGui" -I"..\..\..\workPath\5.4\mingw491_32\include\QtTest" -I"..\..\..\workPath\5.4\mingw491_32\include\QtCore" -I"release" -I"." -I"..\..\..\workPath\5.4\mingw491_32\mkspecs\win32-g++" 
 LINKER      =        g++
-LFLAGS        =        -Wl,-s -Wl,-subsystem,windows -mthreads
-LIBS        =        -lglu32 -lopengl32 -lgdi32 -luser32 -lmingw32 -LD:/Qt5-Android/workPath/5.4/mingw491_32/lib -lqtmain -LC:\mingw491\mingw32\lib -LC:\Utils\icu32_53_1_mingw482\lib -LC:\utils\postgresql\pgsql\lib -LC:\utils\mysql\mysql\lib -LC:\opensll\lib -lshell32 -LD:\Qt5-Android\workPath\5.4\mingw491_32/lib -lQt5Widgets -lQt5Gui -lQt5Core 
+LFLAGS        =        -Wl,-s -Wl,-subsystem,console -mthreads
+LIBS        =        -lglu32 -lopengl32 -lgdi32 -luser32 -LD:/Qt5-Android/workPath/5.4/mingw491_32/lib -lQt5Widgets -lQt5Gui -lQt5Test -lQt5Core 
 QMAKE         = D:\Qt5-Android\workPath\5.4\mingw491_32\bin\qmake.exe
 IDC           = idc
 IDL           = midl
@@ -44,12 +44,14 @@ OBJECTS_DIR   = release
 ####### Files
 
 SOURCES       = ..\Robot\main.cpp \
-		..\Robot\mainwindow.cpp release\moc_mainwindow.cpp
+		..\Robot\mainwindow.cpp release\qrc_resource.cpp \
+		release\moc_mainwindow.cpp
 OBJECTS       = release/main.o \
 		release/mainwindow.o \
+		release/qrc_resource.o \
 		release/moc_mainwindow.o
 
-DIST          = Welcome.png ..\Robot\mainwindow.h ..\Robot\main.cpp \
+DIST          =  ..\Robot\mainwindow.h ..\Robot\main.cpp \
 		..\Robot\mainwindow.cpp
 QMAKE_TARGET  = Robot
 DESTDIR        = release\ #avoid trailing-slash linebreak
@@ -86,10 +88,10 @@ qmake: FORCE
 qmake_all: FORCE
 
 dist:
-	$(ZIP) Robot.zip $(SOURCES) $(DIST) ..\Robot\Robot.pro ..\..\..\workPath\5.4\mingw491_32\mkspecs\features\spec_pre.prf ..\..\..\workPath\5.4\mingw491_32\mkspecs\qdevice.pri ..\..\..\workPath\5.4\mingw491_32\mkspecs\features\device_config.prf ..\..\..\workPath\5.4\mingw491_32\mkspecs\common\shell-win32.conf ..\..\..\workPath\5.4\mingw491_32\mkspecs\qconfig.pri ..\..\..\workPath\5.4\mingw491_32\mkspecs\modules\qt_lib_axbase.pri ..\..\..\workPath\5.4\mingw491_32\mkspecs\modules\qt_lib_axbase_private.pri ..\..\..\workPath\5.4\mingw491_32\mkspecs\modules\qt_lib_axcontainer.pri ..\..\..\workPath\5.4\mingw491_32\mkspecs\modules\qt_lib_axcontainer_private.pri ..\..\..\workPath\5.4\mingw491_32\mkspecs\modules\qt_lib_axserver.pri ..\..\..\workPath\5.4\mingw491_32\mkspecs\modules\qt_lib_axserver_private.pri ..\..\..\workPath\5.4\mingw491_32\mkspecs\modules\qt_lib_bluetooth.pri ..\..\..\workPath\5.4\mingw491_32\mkspecs\modules\qt_lib_bluetooth_private.pri ..\..\..\workPath\5.4\mingw491_32\mkspecs\modules\qt_lib_bootstrap_private.pri ..\..\..\workPath\5.4\mingw491_32\mkspecs\modules\qt_lib_clucene_private.pri ..\..\..\workPath\5.4\mingw491_32\mkspecs\modules\qt_lib_concurrent.pri ..\..\..\workPath\5.4\mingw491_32\mkspecs\modules\qt_lib_concurrent_private.pri ..\..\..\workPath\5.4\mingw491_32\mkspecs\modules\qt_lib_core.pri ..\..\..\workPath\5.4\mingw491_32\mkspecs\modules\qt_lib_core_private.pri ..\..\..\workPath\5.4\mingw491_32\mkspecs\modules\qt_lib_dbus.pri ..\..\..\workPath\5.4\mingw491_32\mkspecs\modules\qt_lib_dbus_private.pri ..\..\..\workPath\5.4\mingw491_32\mkspecs\modules\qt_lib_declarative.pri ..\..\..\workPath\5.4\mingw491_32\mkspecs\modules\qt_lib_declarative_private.pri ..\..\..\workPath\5.4\mingw491_32\mkspecs\modules\qt_lib_designer.pri ..\..\..\workPath\5.4\mingw491_32\mkspecs\modules\qt_lib_designer_private.pri ..\..\..\workPath\5.4\mingw491_32\mkspecs\modules\qt_lib_designercomponents_private.pri ..\..\..\workPath\5.4\mingw491_32\mkspecs\modules\qt_lib_enginio.pri ..\..\..\workPath\5.4\mingw491_32\mkspecs\modules\qt_lib_enginio_private.pri ..\..\..\workPath\5.4\mingw491_32\mkspecs\modules\qt_lib_gui.pri ..\..\..\workPath\5.4\mingw491_32\mkspecs\modules\qt_lib_gui_private.pri ..\..\..\workPath\5.4\mingw491_32\mkspecs\modules\qt_lib_help.pri ..\..\..\workPath\5.4\mingw491_32\mkspecs\modules\qt_lib_help_private.pri ..\..\..\workPath\5.4\mingw491_32\mkspecs\modules\qt_lib_location.pri ..\..\..\workPath\5.4\mingw491_32\mkspecs\modules\qt_lib_location_private.pri ..\..\..\workPath\5.4\mingw491_32\mkspecs\modules\qt_lib_multimedia.pri ..\..\..\workPath\5.4\mingw491_32\mkspecs\modules\qt_lib_multimedia_private.pri ..\..\..\workPath\5.4\mingw491_32\mkspecs\modules\qt_lib_multimediawidgets.pri ..\..\..\workPath\5.4\mingw491_32\mkspecs\modules\qt_lib_multimediawidgets_private.pri ..\..\..\workPath\5.4\mingw491_32\mkspecs\modules\qt_lib_network.pri ..\..\..\workPath\5.4\mingw491_32\mkspecs\modules\qt_lib_network_private.pri ..\..\..\workPath\5.4\mingw491_32\mkspecs\modules\qt_lib_nfc.pri ..\..\..\workPath\5.4\mingw491_32\mkspecs\modules\qt_lib_nfc_private.pri ..\..\..\workPath\5.4\mingw491_32\mkspecs\modules\qt_lib_opengl.pri ..\..\..\workPath\5.4\mingw491_32\mkspecs\modules\qt_lib_opengl_private.pri ..\..\..\workPath\5.4\mingw491_32\mkspecs\modules\qt_lib_openglextensions.pri ..\..\..\workPath\5.4\mingw491_32\mkspecs\modules\qt_lib_openglextensions_private.pri ..\..\..\workPath\5.4\mingw491_32\mkspecs\modules\qt_lib_platformsupport_private.pri ..\..\..\workPath\5.4\mingw491_32\mkspecs\modules\qt_lib_positioning.pri ..\..\..\workPath\5.4\mingw491_32\mkspecs\modules\qt_lib_positioning_private.pri ..\..\..\workPath\5.4\mingw491_32\mkspecs\modules\qt_lib_printsupport.pri ..\..\..\workPath\5.4\mingw491_32\mkspecs\modules\qt_lib_printsupport_private.pri ..\..\..\workPath\5.4\mingw491_32\mkspecs\modules\qt_lib_qml.pri ..\..\..\workPath\5.4\mingw491_32\mkspecs\modules\qt_lib_qml_private.pri ..\..\..\workPath\5.4\mingw491_32\mkspecs\modules\qt_lib_qmldevtools_private.pri ..\..\..\workPath\5.4\mingw491_32\mkspecs\modules\qt_lib_qmltest.pri ..\..\..\workPath\5.4\mingw491_32\mkspecs\modules\qt_lib_qmltest_private.pri ..\..\..\workPath\5.4\mingw491_32\mkspecs\modules\qt_lib_qtmultimediaquicktools_private.pri ..\..\..\workPath\5.4\mingw491_32\mkspecs\modules\qt_lib_quick.pri ..\..\..\workPath\5.4\mingw491_32\mkspecs\modules\qt_lib_quick_private.pri ..\..\..\workPath\5.4\mingw491_32\mkspecs\modules\qt_lib_quickparticles_private.pri ..\..\..\workPath\5.4\mingw491_32\mkspecs\modules\qt_lib_quickwidgets.pri ..\..\..\workPath\5.4\mingw491_32\mkspecs\modules\qt_lib_quickwidgets_private.pri ..\..\..\workPath\5.4\mingw491_32\mkspecs\modules\qt_lib_script.pri ..\..\..\workPath\5.4\mingw491_32\mkspecs\modules\qt_lib_script_private.pri ..\..\..\workPath\5.4\mingw491_32\mkspecs\modules\qt_lib_scripttools.pri ..\..\..\workPath\5.4\mingw491_32\mkspecs\modules\qt_lib_scripttools_private.pri ..\..\..\workPath\5.4\mingw491_32\mkspecs\modules\qt_lib_sensors.pri ..\..\..\workPath\5.4\mingw491_32\mkspecs\modules\qt_lib_sensors_private.pri ..\..\..\workPath\5.4\mingw491_32\mkspecs\modules\qt_lib_serialport.pri ..\..\..\workPath\5.4\mingw491_32\mkspecs\modules\qt_lib_serialport_private.pri ..\..\..\workPath\5.4\mingw491_32\mkspecs\modules\qt_lib_sql.pri ..\..\..\workPath\5.4\mingw491_32\mkspecs\modules\qt_lib_sql_private.pri ..\..\..\workPath\5.4\mingw491_32\mkspecs\modules\qt_lib_svg.pri ..\..\..\workPath\5.4\mingw491_32\mkspecs\modules\qt_lib_svg_private.pri ..\..\..\workPath\5.4\mingw491_32\mkspecs\modules\qt_lib_testlib.pri ..\..\..\workPath\5.4\mingw491_32\mkspecs\modules\qt_lib_testlib_private.pri ..\..\..\workPath\5.4\mingw491_32\mkspecs\modules\qt_lib_uitools.pri ..\..\..\workPath\5.4\mingw491_32\mkspecs\modules\qt_lib_uitools_private.pri ..\..\..\workPath\5.4\mingw491_32\mkspecs\modules\qt_lib_webchannel.pri ..\..\..\workPath\5.4\mingw491_32\mkspecs\modules\qt_lib_webchannel_private.pri ..\..\..\workPath\5.4\mingw491_32\mkspecs\modules\qt_lib_webkit.pri ..\..\..\workPath\5.4\mingw491_32\mkspecs\modules\qt_lib_webkit_private.pri ..\..\..\workPath\5.4\mingw491_32\mkspecs\modules\qt_lib_webkitwidgets.pri ..\..\..\workPath\5.4\mingw491_32\mkspecs\modules\qt_lib_webkitwidgets_private.pri ..\..\..\workPath\5.4\mingw491_32\mkspecs\modules\qt_lib_websockets.pri ..\..\..\workPath\5.4\mingw491_32\mkspecs\modules\qt_lib_websockets_private.pri ..\..\..\workPath\5.4\mingw491_32\mkspecs\modules\qt_lib_webview.pri ..\..\..\workPath\5.4\mingw491_32\mkspecs\modules\qt_lib_webview_private.pri ..\..\..\workPath\5.4\mingw491_32\mkspecs\modules\qt_lib_widgets.pri ..\..\..\workPath\5.4\mingw491_32\mkspecs\modules\qt_lib_widgets_private.pri ..\..\..\workPath\5.4\mingw491_32\mkspecs\modules\qt_lib_winextras.pri ..\..\..\workPath\5.4\mingw491_32\mkspecs\modules\qt_lib_winextras_private.pri ..\..\..\workPath\5.4\mingw491_32\mkspecs\modules\qt_lib_xml.pri ..\..\..\workPath\5.4\mingw491_32\mkspecs\modules\qt_lib_xml_private.pri ..\..\..\workPath\5.4\mingw491_32\mkspecs\modules\qt_lib_xmlpatterns.pri ..\..\..\workPath\5.4\mingw491_32\mkspecs\modules\qt_lib_xmlpatterns_private.pri ..\..\..\workPath\5.4\mingw491_32\mkspecs\features\qt_functions.prf ..\..\..\workPath\5.4\mingw491_32\mkspecs\features\qt_config.prf ..\..\..\workPath\5.4\mingw491_32\mkspecs\features\win32\qt_config.prf ..\..\..\workPath\5.4\mingw491_32\mkspecs\win32-g++\qmake.conf ..\..\..\workPath\5.4\mingw491_32\mkspecs\features\spec_post.prf ..\..\..\workPath\5.4\mingw491_32\mkspecs\features\exclusive_builds.prf ..\..\..\workPath\5.4\mingw491_32\mkspecs\features\default_pre.prf ..\..\..\workPath\5.4\mingw491_32\mkspecs\features\win32\default_pre.prf ..\..\..\workPath\5.4\mingw491_32\mkspecs\features\resolve_config.prf ..\..\..\workPath\5.4\mingw491_32\mkspecs\features\exclusive_builds_post.prf ..\..\..\workPath\5.4\mingw491_32\mkspecs\features\default_post.prf ..\..\..\workPath\5.4\mingw491_32\mkspecs\features\build_pass.prf ..\..\..\workPath\5.4\mingw491_32\mkspecs\features\win32\rtti.prf ..\..\..\workPath\5.4\mingw491_32\mkspecs\features\precompile_header.prf ..\..\..\workPath\5.4\mingw491_32\mkspecs\features\warn_on.prf ..\..\..\workPath\5.4\mingw491_32\mkspecs\features\qt.prf ..\..\..\workPath\5.4\mingw491_32\mkspecs\features\resources.prf ..\..\..\workPath\5.4\mingw491_32\mkspecs\features\moc.prf ..\..\..\workPath\5.4\mingw491_32\mkspecs\features\win32\opengl.prf ..\..\..\workPath\5.4\mingw491_32\mkspecs\features\uic.prf ..\..\..\workPath\5.4\mingw491_32\mkspecs\features\win32\windows.prf ..\..\..\workPath\5.4\mingw491_32\mkspecs\features\testcase_targets.prf ..\..\..\workPath\5.4\mingw491_32\mkspecs\features\exceptions.prf ..\..\..\workPath\5.4\mingw491_32\mkspecs\features\yacc.prf ..\..\..\workPath\5.4\mingw491_32\mkspecs\features\lex.prf ..\Robot\Robot.pro D:/Qt5-Android/workPath/5.4/mingw491_32/lib/qtmain.prl D:/Qt5-Android/workPath/5.4/mingw491_32/lib/Qt5Core.prl D:/Qt5-Android/workPath/5.4/mingw491_32/lib/Qt5Widgets.prl D:/Qt5-Android/workPath/5.4/mingw491_32/lib/Qt5Gui.prl  NO_PCH_SOURCES RESOURCES HEADERS SOURCES OBJECTIVE_SOURCES FORMS YACCSOURCES YACCSOURCES LEXSOURCES 
+	$(ZIP) Robot.zip $(SOURCES) $(DIST) ..\Robot\Robot.pro ..\..\..\workPath\5.4\mingw491_32\mkspecs\features\spec_pre.prf ..\..\..\workPath\5.4\mingw491_32\mkspecs\qdevice.pri ..\..\..\workPath\5.4\mingw491_32\mkspecs\features\device_config.prf ..\..\..\workPath\5.4\mingw491_32\mkspecs\common\shell-win32.conf ..\..\..\workPath\5.4\mingw491_32\mkspecs\qconfig.pri ..\..\..\workPath\5.4\mingw491_32\mkspecs\modules\qt_lib_axbase.pri ..\..\..\workPath\5.4\mingw491_32\mkspecs\modules\qt_lib_axbase_private.pri ..\..\..\workPath\5.4\mingw491_32\mkspecs\modules\qt_lib_axcontainer.pri ..\..\..\workPath\5.4\mingw491_32\mkspecs\modules\qt_lib_axcontainer_private.pri ..\..\..\workPath\5.4\mingw491_32\mkspecs\modules\qt_lib_axserver.pri ..\..\..\workPath\5.4\mingw491_32\mkspecs\modules\qt_lib_axserver_private.pri ..\..\..\workPath\5.4\mingw491_32\mkspecs\modules\qt_lib_bluetooth.pri ..\..\..\workPath\5.4\mingw491_32\mkspecs\modules\qt_lib_bluetooth_private.pri ..\..\..\workPath\5.4\mingw491_32\mkspecs\modules\qt_lib_bootstrap_private.pri ..\..\..\workPath\5.4\mingw491_32\mkspecs\modules\qt_lib_clucene_private.pri ..\..\..\workPath\5.4\mingw491_32\mkspecs\modules\qt_lib_concurrent.pri ..\..\..\workPath\5.4\mingw491_32\mkspecs\modules\qt_lib_concurrent_private.pri ..\..\..\workPath\5.4\mingw491_32\mkspecs\modules\qt_lib_core.pri ..\..\..\workPath\5.4\mingw491_32\mkspecs\modules\qt_lib_core_private.pri ..\..\..\workPath\5.4\mingw491_32\mkspecs\modules\qt_lib_dbus.pri ..\..\..\workPath\5.4\mingw491_32\mkspecs\modules\qt_lib_dbus_private.pri ..\..\..\workPath\5.4\mingw491_32\mkspecs\modules\qt_lib_declarative.pri ..\..\..\workPath\5.4\mingw491_32\mkspecs\modules\qt_lib_declarative_private.pri ..\..\..\workPath\5.4\mingw491_32\mkspecs\modules\qt_lib_designer.pri ..\..\..\workPath\5.4\mingw491_32\mkspecs\modules\qt_lib_designer_private.pri ..\..\..\workPath\5.4\mingw491_32\mkspecs\modules\qt_lib_designercomponents_private.pri ..\..\..\workPath\5.4\mingw491_32\mkspecs\modules\qt_lib_enginio.pri ..\..\..\workPath\5.4\mingw491_32\mkspecs\modules\qt_lib_enginio_private.pri ..\..\..\workPath\5.4\mingw491_32\mkspecs\modules\qt_lib_gui.pri ..\..\..\workPath\5.4\mingw491_32\mkspecs\modules\qt_lib_gui_private.pri ..\..\..\workPath\5.4\mingw491_32\mkspecs\modules\qt_lib_help.pri ..\..\..\workPath\5.4\mingw491_32\mkspecs\modules\qt_lib_help_private.pri ..\..\..\workPath\5.4\mingw491_32\mkspecs\modules\qt_lib_location.pri ..\..\..\workPath\5.4\mingw491_32\mkspecs\modules\qt_lib_location_private.pri ..\..\..\workPath\5.4\mingw491_32\mkspecs\modules\qt_lib_multimedia.pri ..\..\..\workPath\5.4\mingw491_32\mkspecs\modules\qt_lib_multimedia_private.pri ..\..\..\workPath\5.4\mingw491_32\mkspecs\modules\qt_lib_multimediawidgets.pri ..\..\..\workPath\5.4\mingw491_32\mkspecs\modules\qt_lib_multimediawidgets_private.pri ..\..\..\workPath\5.4\mingw491_32\mkspecs\modules\qt_lib_network.pri ..\..\..\workPath\5.4\mingw491_32\mkspecs\modules\qt_lib_network_private.pri ..\..\..\workPath\5.4\mingw491_32\mkspecs\modules\qt_lib_nfc.pri ..\..\..\workPath\5.4\mingw491_32\mkspecs\modules\qt_lib_nfc_private.pri ..\..\..\workPath\5.4\mingw491_32\mkspecs\modules\qt_lib_opengl.pri ..\..\..\workPath\5.4\mingw491_32\mkspecs\modules\qt_lib_opengl_private.pri ..\..\..\workPath\5.4\mingw491_32\mkspecs\modules\qt_lib_openglextensions.pri ..\..\..\workPath\5.4\mingw491_32\mkspecs\modules\qt_lib_openglextensions_private.pri ..\..\..\workPath\5.4\mingw491_32\mkspecs\modules\qt_lib_platformsupport_private.pri ..\..\..\workPath\5.4\mingw491_32\mkspecs\modules\qt_lib_positioning.pri ..\..\..\workPath\5.4\mingw491_32\mkspecs\modules\qt_lib_positioning_private.pri ..\..\..\workPath\5.4\mingw491_32\mkspecs\modules\qt_lib_printsupport.pri ..\..\..\workPath\5.4\mingw491_32\mkspecs\modules\qt_lib_printsupport_private.pri ..\..\..\workPath\5.4\mingw491_32\mkspecs\modules\qt_lib_qml.pri ..\..\..\workPath\5.4\mingw491_32\mkspecs\modules\qt_lib_qml_private.pri ..\..\..\workPath\5.4\mingw491_32\mkspecs\modules\qt_lib_qmldevtools_private.pri ..\..\..\workPath\5.4\mingw491_32\mkspecs\modules\qt_lib_qmltest.pri ..\..\..\workPath\5.4\mingw491_32\mkspecs\modules\qt_lib_qmltest_private.pri ..\..\..\workPath\5.4\mingw491_32\mkspecs\modules\qt_lib_qtmultimediaquicktools_private.pri ..\..\..\workPath\5.4\mingw491_32\mkspecs\modules\qt_lib_quick.pri ..\..\..\workPath\5.4\mingw491_32\mkspecs\modules\qt_lib_quick_private.pri ..\..\..\workPath\5.4\mingw491_32\mkspecs\modules\qt_lib_quickparticles_private.pri ..\..\..\workPath\5.4\mingw491_32\mkspecs\modules\qt_lib_quickwidgets.pri ..\..\..\workPath\5.4\mingw491_32\mkspecs\modules\qt_lib_quickwidgets_private.pri ..\..\..\workPath\5.4\mingw491_32\mkspecs\modules\qt_lib_script.pri ..\..\..\workPath\5.4\mingw491_32\mkspecs\modules\qt_lib_script_private.pri ..\..\..\workPath\5.4\mingw491_32\mkspecs\modules\qt_lib_scripttools.pri ..\..\..\workPath\5.4\mingw491_32\mkspecs\modules\qt_lib_scripttools_private.pri ..\..\..\workPath\5.4\mingw491_32\mkspecs\modules\qt_lib_sensors.pri ..\..\..\workPath\5.4\mingw491_32\mkspecs\modules\qt_lib_sensors_private.pri ..\..\..\workPath\5.4\mingw491_32\mkspecs\modules\qt_lib_serialport.pri ..\..\..\workPath\5.4\mingw491_32\mkspecs\modules\qt_lib_serialport_private.pri ..\..\..\workPath\5.4\mingw491_32\mkspecs\modules\qt_lib_sql.pri ..\..\..\workPath\5.4\mingw491_32\mkspecs\modules\qt_lib_sql_private.pri ..\..\..\workPath\5.4\mingw491_32\mkspecs\modules\qt_lib_svg.pri ..\..\..\workPath\5.4\mingw491_32\mkspecs\modules\qt_lib_svg_private.pri ..\..\..\workPath\5.4\mingw491_32\mkspecs\modules\qt_lib_testlib.pri ..\..\..\workPath\5.4\mingw491_32\mkspecs\modules\qt_lib_testlib_private.pri ..\..\..\workPath\5.4\mingw491_32\mkspecs\modules\qt_lib_uitools.pri ..\..\..\workPath\5.4\mingw491_32\mkspecs\modules\qt_lib_uitools_private.pri ..\..\..\workPath\5.4\mingw491_32\mkspecs\modules\qt_lib_webchannel.pri ..\..\..\workPath\5.4\mingw491_32\mkspecs\modules\qt_lib_webchannel_private.pri ..\..\..\workPath\5.4\mingw491_32\mkspecs\modules\qt_lib_webkit.pri ..\..\..\workPath\5.4\mingw491_32\mkspecs\modules\qt_lib_webkit_private.pri ..\..\..\workPath\5.4\mingw491_32\mkspecs\modules\qt_lib_webkitwidgets.pri ..\..\..\workPath\5.4\mingw491_32\mkspecs\modules\qt_lib_webkitwidgets_private.pri ..\..\..\workPath\5.4\mingw491_32\mkspecs\modules\qt_lib_websockets.pri ..\..\..\workPath\5.4\mingw491_32\mkspecs\modules\qt_lib_websockets_private.pri ..\..\..\workPath\5.4\mingw491_32\mkspecs\modules\qt_lib_webview.pri ..\..\..\workPath\5.4\mingw491_32\mkspecs\modules\qt_lib_webview_private.pri ..\..\..\workPath\5.4\mingw491_32\mkspecs\modules\qt_lib_widgets.pri ..\..\..\workPath\5.4\mingw491_32\mkspecs\modules\qt_lib_widgets_private.pri ..\..\..\workPath\5.4\mingw491_32\mkspecs\modules\qt_lib_winextras.pri ..\..\..\workPath\5.4\mingw491_32\mkspecs\modules\qt_lib_winextras_private.pri ..\..\..\workPath\5.4\mingw491_32\mkspecs\modules\qt_lib_xml.pri ..\..\..\workPath\5.4\mingw491_32\mkspecs\modules\qt_lib_xml_private.pri ..\..\..\workPath\5.4\mingw491_32\mkspecs\modules\qt_lib_xmlpatterns.pri ..\..\..\workPath\5.4\mingw491_32\mkspecs\modules\qt_lib_xmlpatterns_private.pri ..\..\..\workPath\5.4\mingw491_32\mkspecs\features\qt_functions.prf ..\..\..\workPath\5.4\mingw491_32\mkspecs\features\qt_config.prf ..\..\..\workPath\5.4\mingw491_32\mkspecs\features\win32\qt_config.prf ..\..\..\workPath\5.4\mingw491_32\mkspecs\win32-g++\qmake.conf ..\..\..\workPath\5.4\mingw491_32\mkspecs\features\spec_post.prf ..\..\..\workPath\5.4\mingw491_32\mkspecs\features\exclusive_builds.prf ..\..\..\workPath\5.4\mingw491_32\mkspecs\features\default_pre.prf ..\..\..\workPath\5.4\mingw491_32\mkspecs\features\win32\default_pre.prf ..\..\..\workPath\5.4\mingw491_32\mkspecs\features\resolve_config.prf ..\..\..\workPath\5.4\mingw491_32\mkspecs\features\exclusive_builds_post.prf ..\..\..\workPath\5.4\mingw491_32\mkspecs\features\default_post.prf ..\..\..\workPath\5.4\mingw491_32\mkspecs\features\build_pass.prf ..\..\..\workPath\5.4\mingw491_32\mkspecs\features\win32\rtti.prf ..\..\..\workPath\5.4\mingw491_32\mkspecs\features\precompile_header.prf ..\..\..\workPath\5.4\mingw491_32\mkspecs\features\warn_on.prf ..\..\..\workPath\5.4\mingw491_32\mkspecs\features\qt.prf ..\..\..\workPath\5.4\mingw491_32\mkspecs\features\resources.prf ..\..\..\workPath\5.4\mingw491_32\mkspecs\features\moc.prf ..\..\..\workPath\5.4\mingw491_32\mkspecs\features\testlib_defines.prf ..\..\..\workPath\5.4\mingw491_32\mkspecs\features\win32\console.prf ..\..\..\workPath\5.4\mingw491_32\mkspecs\features\win32\opengl.prf ..\..\..\workPath\5.4\mingw491_32\mkspecs\features\uic.prf ..\..\..\workPath\5.4\mingw491_32\mkspecs\features\testcase_targets.prf ..\..\..\workPath\5.4\mingw491_32\mkspecs\features\exceptions.prf ..\..\..\workPath\5.4\mingw491_32\mkspecs\features\yacc.prf ..\..\..\workPath\5.4\mingw491_32\mkspecs\features\lex.prf ..\Robot\Robot.pro ..\Robot\resource.qrc D:/Qt5-Android/workPath/5.4/mingw491_32/lib/Qt5Widgets.prl D:/Qt5-Android/workPath/5.4/mingw491_32/lib/Qt5Gui.prl D:/Qt5-Android/workPath/5.4/mingw491_32/lib/Qt5Test.prl D:/Qt5-Android/workPath/5.4/mingw491_32/lib/Qt5Core.prl  NO_PCH_SOURCES RESOURCES HEADERS SOURCES OBJECTIVE_SOURCES FORMS YACCSOURCES YACCSOURCES LEXSOURCES 
 
 clean: compiler_clean 
-	-$(DEL_FILE) release\main.o release\mainwindow.o release\moc_mainwindow.o
+	-$(DEL_FILE) release\main.o release\mainwindow.o release\qrc_resource.o release\moc_mainwindow.o
 
 distclean: clean 
 	-$(DEL_FILE) $(DESTDIR_TARGET)
@@ -103,8 +105,13 @@ check: first
 
 compiler_no_pch_compiler_make_all:
 compiler_no_pch_compiler_clean:
-compiler_rcc_make_all:
+compiler_rcc_make_all: release/qrc_resource.cpp
 compiler_rcc_clean:
+	-$(DEL_FILE) release\qrc_resource.cpp
+release/qrc_resource.cpp: ../Robot/resource.qrc \
+		../Robot/Welcome.png
+	D:\Qt5-Android\workPath\5.4\mingw491_32\bin\rcc.exe -name resource ..\Robot\resource.qrc -o release\qrc_resource.cpp
+
 compiler_moc_header_make_all: release/moc_mainwindow.cpp
 compiler_moc_header_clean:
 	-$(DEL_FILE) release\moc_mainwindow.cpp
@@ -214,7 +221,7 @@ release/moc_mainwindow.cpp: ../../../workPath/5.4/mingw491_32/include/QtWidgets/
 		../../../workPath/5.4/mingw491_32/include/QtWidgets/qtabwidget.h \
 		../../../workPath/5.4/mingw491_32/include/QtGui/qicon.h \
 		../Robot/mainwindow.h
-	D:\Qt5-Android\workPath\5.4\mingw491_32\bin\moc.exe $(DEFINES) -D__GNUC__ -DWIN32 -ID:/Qt5-Android/workPath/5.4/mingw491_32/mkspecs/win32-g++ -ID:/Qt5-Android/workSpace/Robot/Robot -ID:/Qt5-Android/workPath/5.4/mingw491_32/include -ID:/Qt5-Android/workPath/5.4/mingw491_32/include/QtWidgets -ID:/Qt5-Android/workPath/5.4/mingw491_32/include/QtGui -ID:/Qt5-Android/workPath/5.4/mingw491_32/include/QtCore -I. ..\Robot\mainwindow.h -o release\moc_mainwindow.cpp
+	D:\Qt5-Android\workPath\5.4\mingw491_32\bin\moc.exe $(DEFINES) -D__GNUC__ -DWIN32 -ID:/Qt5-Android/workPath/5.4/mingw491_32/mkspecs/win32-g++ -ID:/Qt5-Android/workSpace/Robot/Robot -ID:/Qt5-Android/workPath/5.4/mingw491_32/include -ID:/Qt5-Android/workPath/5.4/mingw491_32/include/QtWidgets -ID:/Qt5-Android/workPath/5.4/mingw491_32/include/QtGui -ID:/Qt5-Android/workPath/5.4/mingw491_32/include/QtTest -ID:/Qt5-Android/workPath/5.4/mingw491_32/include/QtCore -I. ..\Robot\mainwindow.h -o release\moc_mainwindow.cpp
 
 compiler_moc_source_make_all:
 compiler_moc_source_clean:
@@ -230,7 +237,7 @@ compiler_yacc_impl_make_all:
 compiler_yacc_impl_clean:
 compiler_lex_make_all:
 compiler_lex_clean:
-compiler_clean: compiler_moc_header_clean compiler_uic_clean 
+compiler_clean: compiler_rcc_clean compiler_moc_header_clean compiler_uic_clean 
 
 
 
@@ -351,7 +358,37 @@ release/main.o: ../Robot/main.cpp ../Robot/mainwindow.h \
 		../../../workPath/5.4/mingw491_32/include/QtGui/qinputmethod.h \
 		../../../workPath/5.4/mingw491_32/include/QtGui/QPixmap \
 		../../../workPath/5.4/mingw491_32/include/QtWidgets/QSplashScreen \
-		../../../workPath/5.4/mingw491_32/include/QtWidgets/qsplashscreen.h
+		../../../workPath/5.4/mingw491_32/include/QtWidgets/qsplashscreen.h \
+		../../../workPath/5.4/mingw491_32/include/QtCore/QElapsedTimer \
+		../../../workPath/5.4/mingw491_32/include/QtCore/qelapsedtimer.h \
+		../../../workPath/5.4/mingw491_32/include/QtCore/QDateTime \
+		../../../workPath/5.4/mingw491_32/include/QtCore/qdatetime.h \
+		../../../workPath/5.4/mingw491_32/include/QtTest/QTest \
+		../../../workPath/5.4/mingw491_32/include/QtTest/qtest.h \
+		../../../workPath/5.4/mingw491_32/include/QtTest/qtest_global.h \
+		../../../workPath/5.4/mingw491_32/include/QtTest/qtestcase.h \
+		../../../workPath/5.4/mingw491_32/include/QtTest/qtestdata.h \
+		../../../workPath/5.4/mingw491_32/include/QtTest/qbenchmark.h \
+		../../../workPath/5.4/mingw491_32/include/QtTest/qbenchmarkmetric.h \
+		../../../workPath/5.4/mingw491_32/include/QtTest/qtestsystem.h \
+		../../../workPath/5.4/mingw491_32/include/QtGui/QWindow \
+		../../../workPath/5.4/mingw491_32/include/QtGui/qwindow.h \
+		../../../workPath/5.4/mingw491_32/include/QtCore/QObject \
+		../../../workPath/5.4/mingw491_32/include/QtCore/QEvent \
+		../../../workPath/5.4/mingw491_32/include/QtCore/QMargins \
+		../../../workPath/5.4/mingw491_32/include/QtCore/QRect \
+		../../../workPath/5.4/mingw491_32/include/QtGui/qsurface.h \
+		../../../workPath/5.4/mingw491_32/include/QtGui/qsurfaceformat.h \
+		../../../workPath/5.4/mingw491_32/include/QtWidgets/QWidget \
+		../../../workPath/5.4/mingw491_32/include/QtTest/qtest_gui.h \
+		../../../workPath/5.4/mingw491_32/include/QtTest/qtestassert.h \
+		../../../workPath/5.4/mingw491_32/include/QtTest/qtestevent.h \
+		../../../workPath/5.4/mingw491_32/include/QtTest/qtestkeyboard.h \
+		../../../workPath/5.4/mingw491_32/include/QtTest/qtestspontaneevent.h \
+		../../../workPath/5.4/mingw491_32/include/QtCore/qpointer.h \
+		../../../workPath/5.4/mingw491_32/include/QtTest/qtestmouse.h \
+		../../../workPath/5.4/mingw491_32/include/QtCore/QDebug \
+		../../../workPath/5.4/mingw491_32/include/QtTest/qtesttouch.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o release\main.o ..\Robot\main.cpp
 
 release/mainwindow.o: ../Robot/mainwindow.cpp ../Robot/mainwindow.h \
@@ -474,6 +511,10 @@ release/mainwindow.o: ../Robot/mainwindow.cpp ../Robot/mainwindow.h \
 		../../../workPath/5.4/mingw491_32/include/QtGui/qinputmethod.h \
 		../../../workPath/5.4/mingw491_32/include/QtWidgets/QButtonGroup \
 		../../../workPath/5.4/mingw491_32/include/QtWidgets/qbuttongroup.h \
+		../../../workPath/5.4/mingw491_32/include/QtWidgets/QCommandLinkButton \
+		../../../workPath/5.4/mingw491_32/include/QtWidgets/qcommandlinkbutton.h \
+		../../../workPath/5.4/mingw491_32/include/QtWidgets/qpushbutton.h \
+		../../../workPath/5.4/mingw491_32/include/QtWidgets/qabstractbutton.h \
 		../../../workPath/5.4/mingw491_32/include/QtWidgets/QHeaderView \
 		../../../workPath/5.4/mingw491_32/include/QtWidgets/qheaderview.h \
 		../../../workPath/5.4/mingw491_32/include/QtWidgets/qabstractitemview.h \
@@ -498,6 +539,9 @@ release/mainwindow.o: ../Robot/mainwindow.cpp ../Robot/mainwindow.h \
 		../../../workPath/5.4/mingw491_32/include/QtWidgets/qstatusbar.h \
 		../../../workPath/5.4/mingw491_32/include/QtWidgets/QWidget
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o release\mainwindow.o ..\Robot\mainwindow.cpp
+
+release/qrc_resource.o: release/qrc_resource.cpp 
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o release\qrc_resource.o release\qrc_resource.cpp
 
 release/moc_mainwindow.o: release/moc_mainwindow.cpp 
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o release\moc_mainwindow.o release\moc_mainwindow.cpp

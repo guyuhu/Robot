@@ -13,13 +13,11 @@
 #include <QtWidgets/QAction>
 #include <QtWidgets/QApplication>
 #include <QtWidgets/QButtonGroup>
-#include <QtWidgets/QCalendarWidget>
+#include <QtWidgets/QCommandLinkButton>
 #include <QtWidgets/QHeaderView>
-#include <QtWidgets/QLabel>
 #include <QtWidgets/QMainWindow>
 #include <QtWidgets/QMenuBar>
 #include <QtWidgets/QStatusBar>
-#include <QtWidgets/QTextBrowser>
 #include <QtWidgets/QWidget>
 
 QT_BEGIN_NAMESPACE
@@ -28,9 +26,7 @@ class Ui_MainWindow
 {
 public:
     QWidget *centralwidget;
-    QCalendarWidget *calendarWidget;
-    QTextBrowser *textBrowser;
-    QLabel *label;
+    QCommandLinkButton *commandLinkButton;
     QMenuBar *menubar;
     QStatusBar *statusbar;
 
@@ -41,15 +37,9 @@ public:
         MainWindow->resize(800, 600);
         centralwidget = new QWidget(MainWindow);
         centralwidget->setObjectName(QStringLiteral("centralwidget"));
-        calendarWidget = new QCalendarWidget(centralwidget);
-        calendarWidget->setObjectName(QStringLiteral("calendarWidget"));
-        calendarWidget->setGeometry(QRect(60, 60, 248, 197));
-        textBrowser = new QTextBrowser(centralwidget);
-        textBrowser->setObjectName(QStringLiteral("textBrowser"));
-        textBrowser->setGeometry(QRect(340, 60, 256, 192));
-        label = new QLabel(centralwidget);
-        label->setObjectName(QStringLiteral("label"));
-        label->setGeometry(QRect(100, 290, 54, 12));
+        commandLinkButton = new QCommandLinkButton(centralwidget);
+        commandLinkButton->setObjectName(QStringLiteral("commandLinkButton"));
+        commandLinkButton->setGeometry(QRect(100, 170, 172, 41));
         MainWindow->setCentralWidget(centralwidget);
         menubar = new QMenuBar(MainWindow);
         menubar->setObjectName(QStringLiteral("menubar"));
@@ -67,7 +57,7 @@ public:
     void retranslateUi(QMainWindow *MainWindow)
     {
         MainWindow->setWindowTitle(QApplication::translate("MainWindow", "MainWindow", 0));
-        label->setText(QApplication::translate("MainWindow", "TextLabel", 0));
+        commandLinkButton->setText(QApplication::translate("MainWindow", "CommandLinkButton", 0));
     } // retranslateUi
 
 };
