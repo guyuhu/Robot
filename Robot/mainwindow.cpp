@@ -6,19 +6,22 @@ MainWindow::MainWindow(QWidget *parent) :
     ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
-    companyWebAddress ="explorer http://www.oschina.net/p/qtsharp";
-    pingNet ="Ping www.baidu.com";
-    getPing();
-    QTimer *pingTimer=new QTimer(this);//此段作用是用一个定时器，每隔10s,查看一次当前ping值。
-    connect(pingTimer,SIGNAL(timeout()),this,SLOT(pingTimeOut()));
-    pingTimer->start(10000);
 
-    bool ok=false;
+    companyWebAddress ="explorer http://www.oschina.net/p/qtsharp";
+
+    pingNet ="Ping www.baidu.com";   //实现ping值的实时测量
+    getPing();
+    QTimer *pingTimer=new QTimer(this);//此段作用是用一个定时器，每隔5s,查看一次当前ping值。
+    connect(pingTimer,SIGNAL(timeout()),this,SLOT(pingTimeOut()));
+    pingTimer->start(5000);
+
+    bool ok=false;                      //定义声明一个服务器实体。
     getHostInformation();
     port=this->ui->editPort->text().toInt(&ok,10);
     tcpserver=new TcpServer(this,port);
 
-    connect(tcpserver,SIGNAL(updateServer(QString,int)),this,SLOT(updateServer(QString,int)));
+    connect(tcpserver,SIGNAL(receiveDataSource(QString,int)),this,SLOT(receiveData(QString,int)));//接收数据槽函数。
+    connect(this,SIGNAL(sendDataSource(QString,int)),this,SLOT(sendData(QString,int)));//发送数据槽函数。
 }
 
 MainWindow::~MainWindow()
@@ -78,7 +81,7 @@ void MainWindow::getPing()
     cmd.waitForFinished(200);
     cmd.waitForReadyRead(200);
     ping =QString::fromLocal8Bit( cmd.readAll());
-    QString pingTime=ping.mid( ping.indexOf("时间="),6);//没办法，只能通过找到字符位置，然后取来得到时间。
+    QString pingTime=ping.mid( ping.indexOf("时间="),7);//没办法，只能通过找到字符位置，然后取来得到时间。
     pingTime=pingTime.mid(pingTime.indexOf("="));
   //  qDebug()<<"ping:"<<ping;
    // qDebug()<<"pingTime:"<<pingTime;
@@ -87,7 +90,7 @@ void MainWindow::getPing()
 }
 
 /*
-* 用定时器做的一个10s固定查询ping值。
+* 用定时器做的一个5s固定查询ping值。
 */
 void MainWindow::pingTimeOut()
 {
@@ -131,4 +134,31 @@ void MainWindow::on_btnRemoteDown_clicked()
         break;
     }
     return;
+}
+
+/*
+ *在服务器端，用来接收客户端传送来的数据，现阶段主要是用作调试，显示出来。
+ * 我们的工作重点就放在数据接收、解析。发送解析。
+ */
+void MainWindow::receiveData(QString msg, int length)
+{
+  //  this->ui->txtShowData->setText(msg.left(length));
+    this->ui->txtShowData->append(msg.left(length));
+}
+
+/*
+ * 发送数据，作为测试，保证服务器、客户端能够连通。
+ * */
+void MainWindow::on_bthOrder_clicked()
+{
+    QString msg;
+    msg=this->ui->editOrder->text();
+    int length=msg.length();
+
+    emit sendDataSource(msg,length);
+}
+
+void MainWindow::sendData(QString msg, int length)
+{
+    tcpserver->sendData(msg,length);
 }

@@ -24,6 +24,8 @@ public:
     explicit MainWindow(QWidget *parent = 0);
     ~MainWindow();
 
+    void receiveData(QString,int);
+
 private slots:
     void on_btnMoreMessage_clicked();
     void pingTimeOut();
@@ -31,18 +33,25 @@ private slots:
 
     void on_btnRemoteDown_clicked();
 
-    private:
+    void on_bthOrder_clicked();
+
+    void sendData(QString msg, int length);
+
+signals:
+    void sendDataSource(QString msg,int length);
+
+private:
     Ui::MainWindow *ui;
     TcpServer *tcpserver;
     int port;
 
-    QString pingNet;
+    QString pingNet;//这里两个实现ping值实时保持功能。
     QString ping;
+
     QString companyWebAddress;
 protected:
     void getHostInformation();
     void getPing();
-
 
 };
 

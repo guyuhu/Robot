@@ -232,6 +232,16 @@
     <property name="title">
      <string>状态区域</string>
     </property>
+    <widget class="QTextBrowser" name="txtShowData">
+     <property name="geometry">
+      <rect>
+       <x>40</x>
+       <y>30</y>
+       <width>221</width>
+       <height>121</height>
+      </rect>
+     </property>
+    </widget>
    </widget>
    <widget class="QGroupBox" name="groupBox_4">
     <property name="geometry">
@@ -245,6 +255,29 @@
     <property name="title">
      <string>命令区域</string>
     </property>
+    <widget class="QPushButton" name="bthOrder">
+     <property name="geometry">
+      <rect>
+       <x>100</x>
+       <y>170</y>
+       <width>131</width>
+       <height>23</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>确认发送命令</string>
+     </property>
+    </widget>
+    <widget class="QLineEdit" name="editOrder">
+     <property name="geometry">
+      <rect>
+       <x>40</x>
+       <y>80</y>
+       <width>271</width>
+       <height>20</height>
+      </rect>
+     </property>
+    </widget>
    </widget>
    <widget class="QGroupBox" name="groupBox_5">
     <property name="geometry">

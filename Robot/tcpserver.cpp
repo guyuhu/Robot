@@ -13,7 +13,7 @@ TcpServer::~TcpServer()
 void TcpServer::incomingConnection(int socketDescriptor)
 {
     TcpSocket *tcpsocket=new TcpSocket(this);
-    connect(tcpsocket,SIGNAL(updateClients(QString,int)),this,SLOT(updateClients(QString,int)));
+    connect(tcpsocket,SIGNAL(updateClients(QString,int)),this,SLOT(receiveData(QString,int)));
     connect(tcpsocket,SIGNAL(disconnected(int)),this,SLOT(slotDisconnected(int)));
 
     tcpsocket->setSocketDescriptor(socketDescriptor);
@@ -25,16 +25,28 @@ void TcpServer::incomingConnection(int socketDescriptor)
  *当有客户端连接的情况下，并且服务器成功接收到了数据，下面服务器则将信息进行广播。
  * 这段需要我们自己修改符合功能。
  */
-void TcpServer::updateClients(QString msg,int length)
+void TcpServer::receiveData(QString msg,int length)
 {
-    emit updateServer(msg,length);
+    emit receiveDataSource(msg,length);
+//    for(int i=0;i<tcpSocketList.count();i++)
+//    {
+//        QTcpSocket *item = tcpSocketList.at(i);
+//        if(item->write(msg.toLatin1(),length)!=length)
+//        {
+//            continue;
+//        }
+//    }
+}
+
+void TcpServer::sendData(QString msg,int length)
+{
     for(int i=0;i<tcpSocketList.count();i++)
     {
-        QTcpSocket *item = tcpSocketList.at(i);
-        if(item->write(msg.toLatin1(),length)!=length)
-        {
-            continue;
-        }
+      QTcpSocket *item = tcpSocketList.at(i);
+      if(item->write(msg.toLatin1(),length)!=length)
+      {
+          continue;
+      }
     }
 }
 
