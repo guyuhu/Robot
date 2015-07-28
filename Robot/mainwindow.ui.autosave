@@ -236,11 +236,30 @@
      <property name="geometry">
       <rect>
        <x>20</x>
-       <y>50</y>
-       <width>321</width>
-       <height>291</height>
+       <y>250</y>
+       <width>191</width>
+       <height>101</height>
       </rect>
      </property>
+    </widget>
+    <widget class="QTableWidget" name="tableWidget">
+     <property name="geometry">
+      <rect>
+       <x>20</x>
+       <y>30</y>
+       <width>331</width>
+       <height>192</height>
+      </rect>
+     </property>
+     <property name="rowCount">
+      <number>0</number>
+     </property>
+     <property name="columnCount">
+      <number>3</number>
+     </property>
+     <column/>
+     <column/>
+     <column/>
     </widget>
    </widget>
    <widget class="QGroupBox" name="groupBox_4">

@@ -7,6 +7,7 @@
 QT       += core gui
 QT +=testlib
 QT +=network
+QT +=core
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
@@ -17,12 +18,16 @@ TEMPLATE = app
 SOURCES += main.cpp \
     mainwindow.cpp \
     tcpsocket.cpp \
-    tcpserver.cpp
+    tcpserver.cpp \
+    protocolfromclient2server.cpp \
+    jsonfromclient2server.cpp
 
 HEADERS  += \
     mainwindow.h \
     tcpsocket.h \
-    tcpserver.h
+    tcpserver.h \
+    protocolfromclient2server.h \
+    jsonfromclient2server.h
 
 DISTFILES += \
     readme.doc

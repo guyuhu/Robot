@@ -16,12 +16,11 @@ void TcpSocket::dataReceived()
 {
     while(bytesAvailable()>0)
     {
-        int length = bytesAvailable();
-        char buf[1024];
-        read(buf,length);
-
-        QString msg=buf;
-        emit updateClients(msg,length);
+        QByteArray jsonData=readAll();
+        jsonFromClient2Server.setJSONData(jsonData);
+        jsonFromClient2Server.converJSON2Data();
+       protocolFromClient2Server= jsonFromClient2Server.getProtocolFromClient2Server();
+        emit updateClients(protocolFromClient2Server);
     }
 }
 

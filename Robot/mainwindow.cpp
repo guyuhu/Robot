@@ -1,8 +1,7 @@
 ﻿#include "mainwindow.h"
 #include "ui_mainwindow.h"
 
-MainWindow::MainWindow(QWidget *parent) :
-    QMainWindow(parent),
+MainWindow::MainWindow(QWidget *parent):QMainWindow(parent),
     ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
@@ -18,9 +17,12 @@ MainWindow::MainWindow(QWidget *parent) :
     bool ok=false;                      //定义声明一个服务器实体。
     getHostInformation();
     port=this->ui->editPort->text().toInt(&ok,10);
-    tcpserver=new TcpServer(this,port);
+    tcpserver=new TcpServer(this,port);         //将server中的有用变量都复制到本函数中。
+    robotHash=tcpserver->getRobotIDHash();
+    robotNumberOnLine=tcpserver->getRobotNumber();
+    showClientMessage();
 
-    connect(tcpserver,SIGNAL(receiveDataSource(QString,int)),this,SLOT(receiveData(QString,int)));//接收数据槽函数。
+    connect(tcpserver,SIGNAL(receiveDataSource(ProtocolFromClient2Server)),this,SLOT(receiveData(ProtocolFromClient2Server)));//接收数据槽函数。
     connect(this,SIGNAL(sendDataSource(QString,int)),this,SLOT(sendData(QString,int)));//发送数据槽函数。
 }
 
@@ -137,13 +139,31 @@ void MainWindow::on_btnRemoteDown_clicked()
 }
 
 /*
+ * 实时显示在线的客户端数目。
+ */
+void MainWindow::showClientMessage()
+{
+   // int clientNumber=robotHash.size();
+   // this->ui->txtLocalClient->setText(QString::number(clientNumber,10));
+    this->ui->txtLocalClient->setText(QString::number(robotNumberOnLine,10));
+}
+
+
+
+/*
  *在服务器端，用来接收客户端传送来的数据，现阶段主要是用作调试，显示出来。
  * 我们的工作重点就放在数据接收、解析。发送解析。
  */
-void MainWindow::receiveData(QString msg, int length)
+void MainWindow::receiveData(ProtocolFromClient2Server protocolFromClient2Server)
 {
-  //  this->ui->txtShowData->setText(msg.left(length));
-    this->ui->txtShowData->append(msg.left(length));
+    this->protocolFromClient2Server=protocolFromClient2Server;
+    QString clientID=this->protocolFromClient2Server.getRobotID();
+    QString instructState=this->protocolFromClient2Server.getInstructState();
+    this->ui->txtShowData->append(clientID+instructState);
+
+    robotHash=tcpserver->getRobotIDHash();
+    robotNumberOnLine=tcpserver->getRobotNumber();
+    showClientMessage();
 }
 
 /*
@@ -161,4 +181,5 @@ void MainWindow::on_bthOrder_clicked()
 void MainWindow::sendData(QString msg, int length)
 {
     tcpserver->sendData(msg,length);
+   // tcpserver.sendData(msg,length);
 }

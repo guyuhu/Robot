@@ -1,0 +1,267 @@
+﻿#include "jsonfromclient2server.h"
+
+JsonFromClient2Server::JsonFromClient2Server(QObject *parent) : QObject(parent)
+{
+
+}
+
+JsonFromClient2Server::~JsonFromClient2Server()
+{
+
+}
+
+
+/*
+ *首先需要外界给定一个protocolFromClient2Server类型的数据源。
+ */
+void JsonFromClient2Server::setProtocolFromClient2Server(ProtocolFromClient2Server protolFromClient2Server)
+{
+    this->protocolFromClient2Server=protolFromClient2Server;
+}
+/*
+ * 将数据转为json格式。
+ */
+void JsonFromClient2Server::converData2JSON()
+{
+    jsonObject.insert("robotID",protocolFromClient2Server.getRobotID());
+    jsonObject.insert("ultrasonic1",protocolFromClient2Server.getUltrasonic1());
+    jsonObject.insert("ultrasonic2",protocolFromClient2Server.getUltrasonic2());
+    jsonObject.insert("ultrasonic3",protocolFromClient2Server.getUltrasonic3());
+    jsonObject.insert("ultrasonic4",protocolFromClient2Server.getUltrasonic4());
+    jsonObject.insert("ultrasonic5",protocolFromClient2Server.getUltrasonic5());
+    jsonObject.insert("ultrasonic6",protocolFromClient2Server.getUltrasonic6());
+    jsonObject.insert("ultrasonic7",protocolFromClient2Server.getUltrasonic7());
+    jsonObject.insert("ultrasonic8",protocolFromClient2Server.getUltrasonic8());
+    jsonObject.insert("gyroData",protocolFromClient2Server.getGyroData());
+    jsonObject.insert("encodeOrientL",protocolFromClient2Server.getEncodeOrientL());
+    jsonObject.insert("encodeOrientR",protocolFromClient2Server.getEncodeOrientR());
+    jsonObject.insert("encodeSpeedL",protocolFromClient2Server.getEncodeSpeedL());
+    jsonObject.insert("encodeSpeedR",protocolFromClient2Server.getEncodeSpeedR());
+    jsonObject.insert("encodeDistanceL",protocolFromClient2Server.getEncodeDistanceL());
+    jsonObject.insert("encodeDistanceR",protocolFromClient2Server.getEncodeDistanceR());
+    jsonObject.insert("finishFlag",protocolFromClient2Server.getFinishFlag());
+    jsonObject.insert("keyResponseFlag",protocolFromClient2Server.getKeyResponseFlag());
+    jsonObject.insert("lastTargetNode",protocolFromClient2Server.getLastTargetNode());
+    jsonObject.insert("currentCoordinateX",protocolFromClient2Server.getCurrentCoordinateX());
+    jsonObject.insert("currentCoordinateY",protocolFromClient2Server.getCurrentCoordinateY());
+    jsonObject.insert("instructState",protocolFromClient2Server.getInstructState());
+
+    jsonDocument.setObject(jsonObject);
+    jsonData=jsonDocument.toJson(QJsonDocument::Compact);
+}
+
+/*
+ * 得到最后的json数据；
+ */
+QString JsonFromClient2Server::getJSONData()
+{
+    QString stringData(jsonData);
+    return stringData;
+}
+
+/*
+ *首先需要外界给定一个bytearray类型的数据源
+ */
+void JsonFromClient2Server::setJSONData(QByteArray jsonData)
+{
+    this->jsonData=jsonData;
+}
+
+/*
+ *将数据转为protocoFromClient2Server格式
+ */
+void JsonFromClient2Server::converJSON2Data()
+{
+    jsonDocument=QJsonDocument::fromJson(jsonData,&jsonError);
+    if(jsonError.error==QJsonParseError::NoError)
+    {
+        if(jsonDocument.isObject())
+        {
+            jsonObject=jsonDocument.object();
+            if(jsonObject.contains("robotID"))
+            {
+                jsonValue=jsonObject.take("robotID");
+                if(jsonValue.isString())
+                {
+                   protocolFromClient2Server.setRobotID(jsonValue.toString());
+                }
+            }
+            if(jsonObject.contains("ultrasonic1"))
+            {
+                jsonValue=jsonObject.take("ultrasonic1");
+                if(jsonValue.isString())
+                {
+                   protocolFromClient2Server.setUltrasonic1(jsonValue.toString());
+                }
+            }
+            if(jsonObject.contains("ultrasonic2"))
+            {
+                jsonValue=jsonObject.take("ultrasonic2");
+                if(jsonValue.isString())
+                {
+                   protocolFromClient2Server.setUltrasonic2(jsonValue.toString());
+                }
+            }
+            if(jsonObject.contains("ultrasonic3"))
+            {
+                jsonValue=jsonObject.take("ultrasonic3");
+                if(jsonValue.isString())
+                {
+                   protocolFromClient2Server.setUltrasonic3(jsonValue.toString());
+                }
+            }
+            if(jsonObject.contains("ultrasonic4"))
+            {
+                jsonValue=jsonObject.take("ultrasonic4");
+                if(jsonValue.isString())
+                {
+                   protocolFromClient2Server.setUltrasonic4(jsonValue.toString());
+                }
+            }
+            if(jsonObject.contains("ultrasonic5"))
+            {
+                jsonValue=jsonObject.take("ultrasonic5");
+                if(jsonValue.isString())
+                {
+                   protocolFromClient2Server.setUltrasonic5(jsonValue.toString());
+                }
+            }
+            if(jsonObject.contains("ultrasonic6"))
+            {
+                jsonValue=jsonObject.take("ultrasonic6");
+                if(jsonValue.isString())
+                {
+                   protocolFromClient2Server.setUltrasonic6(jsonValue.toString());
+                }
+            }
+            if(jsonObject.contains("ultrasonic7"))
+            {
+                jsonValue=jsonObject.take("ultrasonic7");
+                if(jsonValue.isString())
+                {
+                   protocolFromClient2Server.setUltrasonic7(jsonValue.toString());
+                }
+            }
+            if(jsonObject.contains("ultrasonic8"))
+            {
+                jsonValue=jsonObject.take("ultrasonic8");
+                if(jsonValue.isString())
+                {
+                   protocolFromClient2Server.setUltrasonic8(jsonValue.toString());
+                }
+            }
+            if(jsonObject.contains("gyroData"))
+            {
+                jsonValue=jsonObject.take("gyroData");
+                if(jsonValue.isString())
+                {
+                   protocolFromClient2Server.setGyroData(jsonValue.toString());
+                }
+            }
+            if(jsonObject.contains("encodeOrientL"))
+            {
+                jsonValue=jsonObject.take("encodeOrientL");
+                if(jsonValue.isString())
+                {
+                   protocolFromClient2Server.setEncodeOrientL(jsonValue.toString());
+                }
+            }
+            if(jsonObject.contains("encodeOrientR"))
+            {
+                jsonValue=jsonObject.take("encodeOrientR");
+                if(jsonValue.isString())
+                {
+                   protocolFromClient2Server.setEncodeOrientR(jsonValue.toString());
+                }
+            }
+            if(jsonObject.contains("encodeSpeedL"))
+            {
+                jsonValue=jsonObject.take("encodeSpeedL");
+                if(jsonValue.isString())
+                {
+                   protocolFromClient2Server.setEncodeSpeedL(jsonValue.toString());
+                }
+            }
+            if(jsonObject.contains("encodeSpeedR"))
+            {
+                jsonValue=jsonObject.take("encodeSpeedR");
+                if(jsonValue.isString())
+                {
+                   protocolFromClient2Server.setEncodeSpeedR(jsonValue.toString());
+                }
+            }
+            if(jsonObject.contains("encodeDistanceL"))
+            {
+                jsonValue=jsonObject.take("encodeDistanceL");
+                if(jsonValue.isString())
+                {
+                   protocolFromClient2Server.setEncodeDistanceL(jsonValue.toString());
+                }
+            }
+            if(jsonObject.contains("encodeDistanceR"))
+            {
+                jsonValue=jsonObject.take("encodeDistanceR");
+                if(jsonValue.isString())
+                {
+                   protocolFromClient2Server.setEncodeDistanceR(jsonValue.toString());
+                }
+            }
+            if(jsonObject.contains("finishFlag"))
+            {
+                jsonValue=jsonObject.take("finishFlag");
+                if(jsonValue.isString())
+                {
+                   protocolFromClient2Server.setFinishFlag(jsonValue.toString());
+                }
+            }
+            if(jsonObject.contains("keyResponseFlag"))
+            {
+                jsonValue=jsonObject.take("keyResponseFlag");
+                if(jsonValue.isString())
+                {
+                   protocolFromClient2Server.setKeyResponseFlag(jsonValue.toString());
+                }
+            }
+            if(jsonObject.contains("lastTargetNode"))
+            {
+                jsonValue=jsonObject.take("lastTargetNode");
+                if(jsonValue.isString())
+                {
+                   protocolFromClient2Server.setLastTargetNode(jsonValue.toString());
+                }
+            }
+            if(jsonObject.contains("currentCoordinateX"))
+            {
+                jsonValue=jsonObject.take("currentCoordinateX");
+                if(jsonValue.isString())
+                {
+                   protocolFromClient2Server.setCurrentCoordinateX(jsonValue.toString());
+                }
+            }
+            if(jsonObject.contains("currentCoordinateY"))
+            {
+                jsonValue=jsonObject.take("currentCoordinateY");
+                if(jsonValue.isString())
+                {
+                   protocolFromClient2Server.setCurrentCoordinateY(jsonValue.toString());
+                }
+            }
+            if(jsonObject.contains("instructState"))
+            {
+                jsonValue=jsonObject.take("instructState");
+                if(jsonValue.isString())
+                {
+                   protocolFromClient2Server.setInstructState(jsonValue.toString());
+                }
+            }
+        }
+    }
+}
+
+/*
+ *得到最后的protocolFromClient2Server数据
+ */
+ProtocolFromClient2Server JsonFromClient2Server::getProtocolFromClient2Server()
+{
+    return this->protocolFromClient2Server;
+}
